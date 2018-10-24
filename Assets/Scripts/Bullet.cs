@@ -12,7 +12,7 @@ public class Bullet : MonoBehaviour {
         _tick += Time.deltaTime;
         if (_tick >= lifeSpan)
         {
-            ShipWeapon.Instance.ReturnBulletToPool(this);
+            ReturnBulletToPool();
         }
         else
         {
@@ -20,19 +20,35 @@ public class Bullet : MonoBehaviour {
         }
     }
 
-    public void Initialize()
+    void ReturnBulletToPool()
+    {
+        ShipWeapon.Instance.ReturnBulletToPool(this);
+    }
+
+    public void Activate()
     {
         transform.position = Vector3.zero;
     }
 
-    public static void InitializeBullet(Bullet bulletObj)
+    public void Deactivate()
     {
-        bulletObj.gameObject.SetActive(true);
-        bulletObj.Initialize();
+        _tick = 0;
     }
 
-    public static void DisposeBullet(Bullet bulletObj)
+    public static void ActivateBullet(Bullet bulletObj)
     {
+        bulletObj.gameObject.SetActive(true);
+        bulletObj.Activate();
+    }
+
+    public static void DeactivateBullet(Bullet bulletObj)
+    {
+        bulletObj.Deactivate();
         bulletObj.gameObject.SetActive(false);
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        ReturnBulletToPool();
     }
 }

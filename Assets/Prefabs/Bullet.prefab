@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 50344433452993776}
   - component: {fileID: 58785931940985054}
   - component: {fileID: 114473953254070570}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  lifeSpan: 0.1
+  lifeSpan: 5
 --- !u!212 &212578066809601238
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -13,7 +13,7 @@ public class ShipWeapon : MonoBehaviour
     void Awake()
     {
         _instance = this;
-        _bulletPool = new Pool<Bullet>(8, BulletFactory, Bullet.InitializeBullet, Bullet.DisposeBullet, true);
+        _bulletPool = new Pool<Bullet>(8, BulletFactory, Bullet.ActivateBullet, Bullet.DeactivateBullet, true);
     }
 
     public Bullet GetBulletFromPool()

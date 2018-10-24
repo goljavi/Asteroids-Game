@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class ShipMotor : MonoBehaviour {
     Rigidbody2D _rb;
+    float cooldownTimer;
+    public float weaponCooldown;
     public float thrust;
     public float rotationThrust;
     public float yBoundary;
     public float xBoundary;
+    public float thresholdForce;
+
 
     // Use this for initialization
     void Start () {
@@ -22,14 +26,20 @@ public class ShipMotor : MonoBehaviour {
     public void Move(float vertical, float horizontal)
     {
         _rb.AddForce(transform.up * thrust * vertical);
-        _rb.AddTorque(rotationThrust * -horizontal);
+        transform.Rotate(Vector3.forward * -horizontal * Time.deltaTime * rotationThrust);
     }
 
     public void Shoot()
     {
-        var bullet = ShipWeapon.Instance.GetBulletFromPool();
-        bullet.transform.position = transform.position;
-        bullet.transform.up = transform.up;
+        
+        if (cooldownTimer <= Time.time)
+        {
+            cooldownTimer = Time.time + weaponCooldown;
+
+            var bullet = ShipWeapon.Instance.GetBulletFromPool();
+            bullet.transform.position = transform.position;
+            bullet.transform.up = transform.up;
+        }
     }
 
     void Boundaries()
@@ -54,6 +64,14 @@ public class ShipMotor : MonoBehaviour {
         {
             transf.x = xBoundary;
             transform.position = transf;
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if(other.relativeVelocity.magnitude > thresholdForce)
+        {
+            Debug.Log("Morí: " + other.relativeVelocity.magnitude);
         }
     }
 }
