@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class Asteroid : MonoBehaviour
 {
-    public float thrust;
-    public float torque;
+    
     public float yBoundary;
     public float xBoundary;
+
+    float _thrust;
+    float _torque;
+    int _stage;
     Rigidbody2D _rb;
-    int stage = 3;
 
     void Update () {
         Boundaries();
@@ -17,8 +19,18 @@ public class Asteroid : MonoBehaviour
 
     void Move()
     {
-        _rb.AddForce(new Vector3(Random.Range(-thrust, thrust), Random.Range(-thrust, thrust), 0));
-        _rb.AddTorque(Random.Range(-torque, torque));
+        _rb.AddForce(new Vector3(Random.Range(-_thrust, _thrust), Random.Range(-_thrust, _thrust), 0));
+        _rb.AddTorque(Random.Range(-_torque, _torque));
+    }
+
+    public void SetAsteroid(int stage, float thrust, float torque, Vector3 size, Vector3 position)
+    {
+        _stage = stage;
+        _thrust = thrust;
+        _torque = torque;
+        transform.localScale = size;
+        transform.position = position;
+        Move();
     }
 
     void Boundaries()
@@ -53,9 +65,8 @@ public class Asteroid : MonoBehaviour
 
     public void Activate()
     {
-        _rb = GetComponent<Rigidbody2D>();
+        if(_rb == null) _rb = GetComponent<Rigidbody2D>();
         transform.position = Vector3.zero;
-        Move();
     }
 
     public static void ActivateAsteroid(Asteroid asteroidObj)
@@ -71,26 +82,7 @@ public class Asteroid : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        SetStage(stage - 1, true);
-        EventsManager.TriggerEvent(EventType.ASTEROID_HIT);
-    }
-
-    public void SetStage(int st, bool instantiate = false)
-    {
-        stage = st;
-        if (stage == 2)
-        {
-            this.transform.localScale = new Vector3(2, 2, 2);
-            if(instantiate) AsteroidSpawner.Instance.InstantiateDefined(2, transform.position);
-        }
-        else if (stage == 1)
-        {
-            this.transform.localScale = new Vector3(1, 1, 1);
-            if (instantiate) AsteroidSpawner.Instance.InstantiateDefined(1, transform.position);
-        }
-        else if (stage == 0)
-        {
-            ReturnAsteroidToPool();
-        }
+        EventsManager.TriggerEvent(EventType.ASTEROID_HIT, transform.position, _stage);
+        AsteroidSpawner.Instance.ReturnAsteroidToPool(this);
     }
 }

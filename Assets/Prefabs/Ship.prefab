@@ -20,7 +20,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4160024682171046}
   - component: {fileID: 212420672523374592}
-  - component: {fileID: 114923181900071820}
   - component: {fileID: 50544471150071156}
   - component: {fileID: 114901843165130696}
   - component: {fileID: 114419580896034790}
@@ -39,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1740720141421524}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.3, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -91,11 +90,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 113962e98365de444846aa7f2d6f0ddb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponCooldown: 0.3
   thrust: 20
-  rotationThrust: 200
+  rotationThrust: 150
   yBoundary: 11
   xBoundary: 19
-  thresholdForce: 2
+  thresholdForce: 5
+  totalLife: 3
+  asteroidHitScore: 20
 --- !u!114 &114901843165130696
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -109,17 +111,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 114473953254070570, guid: 4904790f23b01224dae8b54c1e8bd5fd,
     type: 2}
---- !u!114 &114923181900071820
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1740720141421524}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b17d874e620ee2e48872bf638f27dfe9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!212 &212420672523374592
 SpriteRenderer:
   m_ObjectHideFlags: 1
