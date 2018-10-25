@@ -113,6 +113,46 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &128427161
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 128427163}
+  - component: {fileID: 128427162}
+  m_Layer: 0
+  m_Name: LevelManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &128427162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 128427161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c96c8fe795db1c4abc3ecd5bfc6db9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &128427163
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 128427161}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 4.8172483, y: -0.30643958, z: -0.25100723}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 422766057}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &210142434
 GameObject:
   m_ObjectHideFlags: 0
@@ -321,8 +361,10 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 128427163}
   - {fileID: 871725869}
   - {fileID: 929227251}
+  - {fileID: 1687286400}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -788,6 +830,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   asteroidPrefab: {fileID: 114601965978622624, guid: 39ccbc23f6a660c4a9a544c7cd5a6375,
     type: 2}
+  asteroidStageDataList:
+  - {fileID: 11400000, guid: fb1ef23f5ea24e042ad979cf1d9bf1a7, type: 2}
+  - {fileID: 11400000, guid: b4985e0c5af49414bbbb87e7c927e80a, type: 2}
+  - {fileID: 11400000, guid: c9c27832187270f4baf450cfe935c19c, type: 2}
+  initialAsteroidStage: 3
 --- !u!4 &871725869
 Transform:
   m_ObjectHideFlags: 0
@@ -799,7 +846,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 422766057}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &922685246
 GameObject:
@@ -950,7 +997,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 927939852}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 128427162}
+        m_MethodName: Restart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &927939852
@@ -1013,7 +1071,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 422766057}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &929227252
 MonoBehaviour:
@@ -1365,7 +1423,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1574947997}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 929227252}
+        m_MethodName: TogglePauseMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1574947997
@@ -1401,6 +1470,47 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1574947994}
+--- !u!1 &1687286399
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1687286400}
+  - component: {fileID: 1687286401}
+  m_Layer: 0
+  m_Name: ConditionManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1687286400
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1687286399}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 4.8172483, y: -0.30643958, z: -0.25100723}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 422766057}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1687286401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1687286399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19724257f20ebcf48b9c3cf3fe80f0de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  winScore: 100
 --- !u!1 &1732914178
 GameObject:
   m_ObjectHideFlags: 0
@@ -1538,7 +1648,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1800224997}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 128427162}
+        m_MethodName: Restart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1800224997
@@ -1786,7 +1907,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 929227252}
         m_MethodName: ToggleStartMenu
-        m_Mode: 6
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1868,37 +1989,6 @@ Prefab:
     - target: {fileID: 4160024682171046, guid: f6aef022b55d6c842ac88afde864c56d, type: 2}
       propertyPath: m_RootOrder
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114901843165130696, guid: f6aef022b55d6c842ac88afde864c56d,
-        type: 2}
-      propertyPath: bulletPrefab
-      value: 
-      objectReference: {fileID: 114473953254070570, guid: 4904790f23b01224dae8b54c1e8bd5fd,
-        type: 2}
-    - target: {fileID: 114419580896034790, guid: f6aef022b55d6c842ac88afde864c56d,
-        type: 2}
-      propertyPath: thrust
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 114419580896034790, guid: f6aef022b55d6c842ac88afde864c56d,
-        type: 2}
-      propertyPath: rotationThrust
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 114419580896034790, guid: f6aef022b55d6c842ac88afde864c56d,
-        type: 2}
-      propertyPath: yBoundary
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 114419580896034790, guid: f6aef022b55d6c842ac88afde864c56d,
-        type: 2}
-      propertyPath: xBoundary
-      value: 19
-      objectReference: {fileID: 0}
-    - target: {fileID: 114419580896034790, guid: f6aef022b55d6c842ac88afde864c56d,
-        type: 2}
-      propertyPath: weaponCooldown
-      value: 0.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f6aef022b55d6c842ac88afde864c56d, type: 2}

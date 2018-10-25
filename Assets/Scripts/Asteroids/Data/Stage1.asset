@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6b564c0c5b992842b7f98186301c029, type: 3}
   m_Name: Stage1
   m_EditorClassIdentifier: 
-  stage: 0
-  size: {x: 0, y: 0, z: 0}
-  thrust: 0
-  torque: 0
+  stage: 1
+  size: {x: 1, y: 1, z: 1}
+  thrust: 300
+  torque: 300

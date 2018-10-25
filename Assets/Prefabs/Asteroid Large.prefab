@@ -89,9 +89,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a43a97e63d1951347ab4f702694175ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stage: 3
-  thrust: 1000
-  torque: 1000
   yBoundary: 12
   xBoundary: 20
 --- !u!212 &212365044104994692
