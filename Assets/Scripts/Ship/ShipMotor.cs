@@ -18,8 +18,8 @@ public class ShipMotor : MonoBehaviour {
     bool _ableToMove = true;
     ShipController _sc;
 
-
-    void Start () {
+    void Awake()
+    {
         _score = 0;
         _actualLife = totalLife;
         _sc = new ShipController(this);
@@ -77,6 +77,7 @@ public class ShipMotor : MonoBehaviour {
 
     void OnInteractiveContentShown(object[] parameterContainer)
     {
+        if (_rb == null) return;
         _rb.velocity = Vector3.zero;
         _rb.isKinematic = true;
         _ableToMove = false;
@@ -84,6 +85,7 @@ public class ShipMotor : MonoBehaviour {
 
     void OnInteractiveContentClosed(object[] parameterContainer)
     {
+        if (_rb == null) return;
         _rb.isKinematic = false;
         _ableToMove = true;
     }
@@ -97,9 +99,7 @@ public class ShipMotor : MonoBehaviour {
     void OnCollisionEnter2D(Collision2D other)
     {
         if (other.relativeVelocity.magnitude < thresholdForce || !_ableToMove) return;
-
         _actualLife--;
-        EventsManager.TriggerEvent(EventType.SHIP_LIFE_CHANGED, _actualLife);
-        Debug.Log("Morí: " + other.relativeVelocity.magnitude);
+        EventsManager.TriggerEvent(EventType.SHIP_LIFE_CHANGED, _actualLife, transform.position);
     }
 }
