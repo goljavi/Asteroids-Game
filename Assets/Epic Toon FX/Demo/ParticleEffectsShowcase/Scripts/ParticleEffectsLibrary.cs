@@ -22,7 +22,7 @@ public class ParticleEffectsLibrary : MonoBehaviour {
 		}
 
 		// Setup Starting PE Name String
-		effectNameString = ParticleEffectPrefabs [CurrentParticleEffectIndex].name + " (" + CurrentParticleEffectNum.ToString() + " of " + TotalEffects.ToString() + ")";
+		//effectNameString = ParticleEffectPrefabs [CurrentParticleEffectIndex].name + " (" + CurrentParticleEffectNum.ToString() + " of " + TotalEffects.ToString() + ")";
 	}
 
 	// Stores total number of effects in arrays - NOTE: All Arrays must match length.
@@ -36,7 +36,7 @@ public class ParticleEffectsLibrary : MonoBehaviour {
 	public GameObject[] ParticleEffectPrefabs;
 
 	// Storing for deleting if looping particle effect
-	private string effectNameString = "";
+	//private string effectNameString = "";
 	private List<Transform> currentActivePEList;
 
 	void Start () {
@@ -68,7 +68,7 @@ public class ParticleEffectsLibrary : MonoBehaviour {
 		CurrentParticleEffectNum = CurrentParticleEffectIndex + 1;
 
 		// Update PE Name String
-		effectNameString = ParticleEffectPrefabs [CurrentParticleEffectIndex].name + " (" + CurrentParticleEffectNum.ToString() + " of " + TotalEffects.ToString() + ")";
+		//effectNameString = ParticleEffectPrefabs [CurrentParticleEffectIndex].name + " (" + CurrentParticleEffectNum.ToString() + " of " + TotalEffects.ToString() + ")";
 	}
 	public void NextParticleEffect() {
 		// Destroy Looping Particle Effects
@@ -92,7 +92,7 @@ public class ParticleEffectsLibrary : MonoBehaviour {
 		CurrentParticleEffectNum = CurrentParticleEffectIndex + 1;
 
 		// Update PE Name String
-		effectNameString = ParticleEffectPrefabs [CurrentParticleEffectIndex].name + " (" + CurrentParticleEffectNum.ToString() + " of " + TotalEffects.ToString() + ")";
+		//effectNameString = ParticleEffectPrefabs [CurrentParticleEffectIndex].name + " (" + CurrentParticleEffectNum.ToString() + " of " + TotalEffects.ToString() + ")";
 	}
 
 	private Vector3 spawnPosition = Vector3.zero;

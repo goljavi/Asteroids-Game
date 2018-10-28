@@ -11,12 +11,12 @@ public enum ButtonTypes {
 
 public class PEButtonScript : MonoBehaviour, IEventSystemHandler, IPointerEnterHandler, IPointerExitHandler {
 
-	private Button myButton;
+	//private Button myButton;
 	public ButtonTypes ButtonType = ButtonTypes.NotDefined;
 
 	// Use this for initialization
 	void Start () {
-		myButton = gameObject.GetComponent<Button> ();
+		//myButton = gameObject.GetComponent<Button> ();
 	}
 
 	public void OnPointerEnter(PointerEventData eventData) {

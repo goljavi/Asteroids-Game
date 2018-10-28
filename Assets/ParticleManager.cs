@@ -12,9 +12,15 @@ public class ParticleManager : MonoBehaviour {
         EventsManager.SubscribeToEvent(EventType.ASTEROID_HIT, OnAsteroidHit);
         EventsManager.SubscribeToEvent(EventType.SHIP_LIFE_CHANGED, OnShipLifeChanged);
         EventsManager.SubscribeToEvent(EventType.LOSE_CONDITION_ACHIEVED, OnLoseConditionAchieved);
+        EventsManager.SubscribeToEvent(EventType.BOMB_EXPLOSION, OnBombExplosion);
     }
-	
-	void OnAsteroidHit(object[] parameterContainer)
+
+    void OnBombExplosion(object[] parameterContainer)
+    {
+        SetParticle(ParticleFactory(asteroidHitParticle), (Vector3)parameterContainer[0]);
+    }
+
+    void OnAsteroidHit(object[] parameterContainer)
     {
         SetParticle(ParticleFactory(asteroidHitParticle), (Vector3)parameterContainer[0]);
     }

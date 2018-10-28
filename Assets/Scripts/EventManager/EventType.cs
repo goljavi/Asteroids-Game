@@ -10,4 +10,5 @@ public static class EventType {
     public const string SHIP_LIFE_CHANGED = "shipLifeChanged";
     public const string LOSE_CONDITION_ACHIEVED = "loseConditionAchieved";
     public const string WIN_CONDITION_ACHIEVED = "winConditionAchieved";
+    public const string BOMB_EXPLOSION = "bombExplosion";
 }

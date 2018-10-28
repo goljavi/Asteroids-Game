@@ -43,6 +43,7 @@ public class AsteroidSpawner : MonoBehaviour {
 
     void Spawn(int stage, Vector3 position)
     {
+        if (!_asteroidStageDataDictionary.ContainsKey(stage)) return;
         var data = _asteroidStageDataDictionary[stage];
         var asteroid = _asteroidPool.GetObjectFromPool();
         asteroid.SetAsteroid(data.stage, data.thrust, data.torque, data.size, position);

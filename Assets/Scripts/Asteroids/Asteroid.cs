@@ -58,11 +58,6 @@ public class Asteroid : MonoBehaviour
         }
     }
 
-    void ReturnAsteroidToPool()
-    {
-        AsteroidSpawner.Instance.ReturnAsteroidToPool(this);
-    }
-
     public void Activate()
     {
         if(_rb == null) _rb = GetComponent<Rigidbody2D>();
@@ -81,6 +76,11 @@ public class Asteroid : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D other)
+    {
+        Kill();
+    }
+
+    public void Kill()
     {
         EventsManager.TriggerEvent(EventType.ASTEROID_HIT, transform.position, _stage);
         AsteroidSpawner.Instance.ReturnAsteroidToPool(this);
