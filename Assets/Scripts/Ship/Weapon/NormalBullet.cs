@@ -14,6 +14,7 @@ public class NormalBullet : IBulletBehaviour {
         _speed = speed;
         _lifeSpan = lifeSpan;
         _reference = reference;
+        EventsManager.TriggerEvent(EventType.BULLET_SHOOT);
     }
 
     public void OnTriggerEnter2D(Collider2D other)

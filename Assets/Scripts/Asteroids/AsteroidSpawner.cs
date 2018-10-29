@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AsteroidSpawner : MonoBehaviour {
-
-    public Asteroid asteroidPrefab;
     public List<AsteroidStageData> asteroidStageDataList;
-    Dictionary<int, AsteroidStageData> _asteroidStageDataDictionary;
     public int initialAsteroidStage;
-    private Pool<Asteroid> _asteroidPool;
+
+    Dictionary<int, AsteroidStageData> _asteroidStageDataDictionary;
+    Asteroid _asteroidPrefab;
+    Pool<Asteroid> _asteroidPool;
 
     private static AsteroidSpawner _instance;
     public static AsteroidSpawner Instance { get { return _instance; } }
@@ -16,6 +16,7 @@ public class AsteroidSpawner : MonoBehaviour {
     void Start()
     {
         _instance = this;
+        _asteroidPrefab = (Asteroid)Resources.Load(ResourcesNames.ASTEROID, typeof(Asteroid));
         _asteroidPool = new Pool<Asteroid>(8, AsteroidFactory, Asteroid.ActivateAsteroid, Asteroid.DeactivateAsteroid, true);
         _asteroidStageDataDictionary = new Dictionary<int, AsteroidStageData>();
 
@@ -56,7 +57,7 @@ public class AsteroidSpawner : MonoBehaviour {
 
     Asteroid AsteroidFactory()
     {
-        return Instantiate(asteroidPrefab);
+        return Instantiate(_asteroidPrefab);
     }
 
     void PrepareAsteroidDataDictionary()

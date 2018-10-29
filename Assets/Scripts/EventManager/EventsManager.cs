@@ -51,11 +51,7 @@ public class EventsManager
     /// <param name="parametersWrapper"></param>
     public static void TriggerEvent(string eventType, params object[] parametersWrapper)
     {
-        if (_events == null)
-        {
-            UnityEngine.Debug.LogWarning("No events subscribed");
-            return;
-        }
+        if (_events == null) return;
 
         if (_events.ContainsKey(eventType))
         {

@@ -45,6 +45,11 @@ public class Bullet : MonoBehaviour {
         transform.position = Vector3.zero;
     }
 
+    public void Deactivate()
+    {
+        transform.localScale = new Vector3(1, 1, 1);
+    }
+
     public static void ActivateBullet(Bullet bulletObj)
     {
         bulletObj.gameObject.SetActive(true);
@@ -53,6 +58,7 @@ public class Bullet : MonoBehaviour {
 
     public static void DeactivateBullet(Bullet bulletObj)
     {
+        bulletObj.Deactivate();
         bulletObj.gameObject.SetActive(false);
     }
 

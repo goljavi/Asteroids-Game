@@ -13,6 +13,7 @@ public class LazerBullet : IBulletBehaviour
         _lifeSpan = lifeSpan;
         _reference = reference;
         _reference.StartCoroutine(Stretch());
+        EventsManager.TriggerEvent(EventType.LAZER_SHOOT);
     }
 
     public void OnTriggerEnter2D(Collider2D other){ }

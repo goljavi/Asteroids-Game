@@ -11,4 +11,6 @@ public static class EventType {
     public const string LOSE_CONDITION_ACHIEVED = "loseConditionAchieved";
     public const string WIN_CONDITION_ACHIEVED = "winConditionAchieved";
     public const string BOMB_EXPLOSION = "bombExplosion";
+    public const string BULLET_SHOOT = "bulletShoot";
+    public const string LAZER_SHOOT = "lazerShoot";
 }
