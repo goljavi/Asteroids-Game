@@ -24,6 +24,7 @@ public class LevelManager : MonoBehaviour {
 
 	public void Restart()
     {
+        EventsManager.Clear();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

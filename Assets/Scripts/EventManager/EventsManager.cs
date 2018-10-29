@@ -59,4 +59,12 @@ public class EventsManager
                 _events[eventType](parametersWrapper);
         }
     }
+
+    /// <summary>
+    /// Limpia el manager de cualquier evento
+    /// </summary>
+    public static void Clear()
+    {
+        _events.Clear();
+    }
 }
