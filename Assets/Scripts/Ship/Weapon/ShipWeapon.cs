@@ -10,22 +10,34 @@ public class ShipWeapon : MonoBehaviour
     Pool<Bullet> _bulletPool;
     WeaponController _wc;
 
-    private static ShipWeapon _instance;
-    public static ShipWeapon Instance { get { return _instance; } }
-
     void Awake()
     {
         _bulletPrefab = (Bullet)Resources.Load(ResourcesNames.BULLET, typeof(Bullet));
-        _instance = this;
         _bulletPool = new Pool<Bullet>(8, BulletFactory, Bullet.ActivateBullet, Bullet.DeactivateBullet, true);
         _wc = new WeaponController(this);
-
         weapon = BulletBehavior.Normal;
+
+        EventsManager.SubscribeToEvent(EventType.SHIP_SHOOT, OnShipShoot);
+        EventsManager.SubscribeToEvent(EventType.RETURN_BULLET, OnReturnBullet);
     }
 
     void Update()
     {
         _wc.Update();
+    }
+
+    void OnReturnBullet(object[] parametersContainer)
+    {
+        ReturnBulletToPool((Bullet)parametersContainer[0]);
+    }
+
+    void OnShipShoot(object[] parametersContainer)
+    {
+        var newTransform = (Transform)parametersContainer[0];
+        var bullet = GetBulletFromPool();
+        bullet.transform.position = newTransform.position;
+        bullet.transform.up = newTransform.up;
+        bullet.Init();
     }
 
     public Bullet GetBulletFromPool()

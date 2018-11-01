@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour {
+    public float normalBulletSpeed;
+    public float normalBulletLifeSpan;
+    public float lazerBulletLifeSpan;
+    public float bombBulletLifeSpan;
+    public LayerMask bombLayerMask;
     IBulletBehaviour bullet;
-    public delegate void Behavior();
-    Dictionary<string, Behavior> _behaviors;
+    Dictionary<string, IBulletBehaviour> _behaviors;
 
     public void Update()
     {
@@ -14,34 +18,26 @@ public class Bullet : MonoBehaviour {
 
     public void SetBehavior(string behavior)
     {
-        if (_behaviors.ContainsKey(behavior)) _behaviors[behavior]();
+        if (!_behaviors.ContainsKey(behavior)) return;
+        bullet = _behaviors[behavior];
+        bullet.Reset();
     }
 
-    void SetNormalBehavior()
+    public void Init()
     {
-        bullet = new NormalBullet(5, 5, this);
-    }
-
-    void SetLazerBehavior()
-    {
-        bullet = new LazerBullet(0.3f, this);
-    }
-
-    void SetBombBehavior()
-    {
-        bullet = new BombBullet(5, this);
+        bullet.Init();
     }
 
     public void Activate()
     {
-        _behaviors = new Dictionary<string, Behavior>
+        _behaviors = new Dictionary<string, IBulletBehaviour>
         {
-            { BulletBehavior.Normal, SetNormalBehavior },
-            { BulletBehavior.Lazer, SetLazerBehavior },
-            { BulletBehavior.Bomb, SetBombBehavior }
+            { BulletBehavior.Normal, new NormalBullet(normalBulletSpeed, normalBulletLifeSpan, this) },
+            { BulletBehavior.Lazer, new LazerBullet(lazerBulletLifeSpan, this) },
+            { BulletBehavior.Bomb, new BombBullet(bombBulletLifeSpan, this, bombLayerMask) }
         };
 
-        bullet = new NormalBullet(5, 5, this);
+        bullet = _behaviors[BulletBehavior.Normal];
         transform.position = Vector3.zero;
     }
 
@@ -64,7 +60,7 @@ public class Bullet : MonoBehaviour {
 
     public void ReturnBulletToPool()
     {
-        ShipWeapon.Instance.ReturnBulletToPool(this);
+        EventsManager.TriggerEvent(EventType.RETURN_BULLET, this);
     }
 
     void OnTriggerEnter2D(Collider2D other)

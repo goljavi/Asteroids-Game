@@ -17,9 +17,16 @@ public class NormalBullet : IBulletBehaviour {
         EventsManager.TriggerEvent(EventType.BULLET_SHOOT);
     }
 
+    public void Init() { }
+
     public void OnTriggerEnter2D(Collider2D other)
     {
         _reference.ReturnBulletToPool();
+    }
+
+    public void Reset()
+    {
+        _tick = 0;
     }
 
     public void Start(){}

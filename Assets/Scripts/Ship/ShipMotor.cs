@@ -16,12 +16,14 @@ public class ShipMotor : MonoBehaviour {
     int _actualLife;
     int _score;
     bool _ableToMove = true;
+    BoundariesChecker _bc;
     ShipController _sc;
 
     void Awake()
     {
         _score = 0;
         _actualLife = totalLife;
+        _bc = new BoundariesChecker(transform, xBoundary, yBoundary);
         _sc = new ShipController(this);
         _rb = GetComponent<Rigidbody2D>();
         EventsManager.SubscribeToEvent(EventType.SHOWING_INTERACTIVE_CONTENT, OnInteractiveContentShown);
@@ -30,7 +32,7 @@ public class ShipMotor : MonoBehaviour {
     }
 	
 	void Update () {
-        Boundaries();
+        _bc.Update();
         _sc.Update();
 	}
 
@@ -45,34 +47,7 @@ public class ShipMotor : MonoBehaviour {
     {
         if (cooldownTimer >= Time.time || !_ableToMove) return;
         cooldownTimer = Time.time + weaponCooldown;
-        var bullet = ShipWeapon.Instance.GetBulletFromPool();
-        bullet.transform.position = transform.position;
-        bullet.transform.up = transform.up;
-    }
-
-    void Boundaries()
-    {
-        var transf = transform.position;
-        if (transform.position.y > yBoundary)
-        {
-            transf.y = -yBoundary;
-            transform.position = transf;
-        }
-        else if (transform.position.y < -yBoundary)
-        {
-            transf.y = yBoundary;
-            transform.position = transf;
-        }
-        else if (transform.position.x > xBoundary)
-        {
-            transf.x = -xBoundary;
-            transform.position = transf;
-        }
-        else if (transform.position.x < -xBoundary)
-        {
-            transf.x = xBoundary;
-            transform.position = transf;
-        }
+        EventsManager.TriggerEvent(EventType.SHIP_SHOOT, transform);
     }
 
     void OnInteractiveContentShown(object[] parameterContainer)

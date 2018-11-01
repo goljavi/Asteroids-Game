@@ -90,12 +90,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 113962e98365de444846aa7f2d6f0ddb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponCooldown: 0.3
+  weaponCooldown: 0.5
   thrust: 20
   rotationThrust: 150
   yBoundary: 11
   xBoundary: 19
-  thresholdForce: 5
+  thresholdForce: 3
   totalLife: 3
   asteroidHitScore: 20
 --- !u!114 &114901843165130696
@@ -109,8 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b576bab2aafafc94a9f5d4b96d09c679, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 114473953254070570, guid: 4904790f23b01224dae8b54c1e8bd5fd,
-    type: 2}
+  weapon: 
 --- !u!212 &212420672523374592
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -10,12 +10,8 @@ public class AsteroidSpawner : MonoBehaviour {
     Asteroid _asteroidPrefab;
     Pool<Asteroid> _asteroidPool;
 
-    private static AsteroidSpawner _instance;
-    public static AsteroidSpawner Instance { get { return _instance; } }
-
     void Start()
     {
-        _instance = this;
         _asteroidPrefab = (Asteroid)Resources.Load(ResourcesNames.ASTEROID, typeof(Asteroid));
         _asteroidPool = new Pool<Asteroid>(8, AsteroidFactory, Asteroid.ActivateAsteroid, Asteroid.DeactivateAsteroid, true);
         _asteroidStageDataDictionary = new Dictionary<int, AsteroidStageData>();
@@ -40,6 +36,7 @@ public class AsteroidSpawner : MonoBehaviour {
             position.y *= Random.Range(0.5f, 1.5f);
             Spawn((int)parametersContainer[1] - 1, position);
         }
+        ReturnAsteroidToPool((Asteroid)parametersContainer[2]);
     }
 
     void Spawn(int stage, Vector3 position)

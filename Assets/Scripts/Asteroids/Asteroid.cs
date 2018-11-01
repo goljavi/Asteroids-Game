@@ -12,9 +12,15 @@ public class Asteroid : MonoBehaviour
     float _torque;
     int _stage;
     Rigidbody2D _rb;
+    BoundariesChecker _bc;
+
+    void Start()
+    {
+        _bc = new BoundariesChecker(transform, xBoundary, yBoundary);
+    }
 
     void Update () {
-        Boundaries();
+        _bc.Update();
 	}
 
     void Move()
@@ -31,31 +37,6 @@ public class Asteroid : MonoBehaviour
         transform.localScale = size;
         transform.position = position;
         Move();
-    }
-
-    void Boundaries()
-    {
-        var transf = transform.position;
-        if (transform.position.y > yBoundary)
-        {
-            transf.y = -yBoundary;
-            transform.position = transf;
-        }
-        else if (transform.position.y < -yBoundary)
-        {
-            transf.y = yBoundary;
-            transform.position = transf;
-        }
-        else if (transform.position.x > xBoundary)
-        {
-            transf.x = -xBoundary;
-            transform.position = transf;
-        }
-        else if (transform.position.x < -xBoundary)
-        {
-            transf.x = xBoundary;
-            transform.position = transf;
-        }
     }
 
     public void Activate()
@@ -82,7 +63,6 @@ public class Asteroid : MonoBehaviour
 
     public void Kill()
     {
-        EventsManager.TriggerEvent(EventType.ASTEROID_HIT, transform.position, _stage);
-        AsteroidSpawner.Instance.ReturnAsteroidToPool(this);
+        EventsManager.TriggerEvent(EventType.ASTEROID_HIT, transform.position, _stage, this);
     }
 }

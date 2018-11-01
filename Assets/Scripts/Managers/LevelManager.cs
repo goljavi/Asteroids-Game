@@ -4,27 +4,31 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour {
-    GameObject _shipPrefab;
+    public int winScore;
 
     void Start()
     {
-        _shipPrefab = (GameObject)Resources.Load(ResourcesNames.SHIP, typeof(GameObject));
-        PrepareLevel();
+        EventsManager.Init();
+        EventsManager.SubscribeToEvent(EventType.SHIP_LIFE_CHANGED, OnShipLifeChanged);
+        EventsManager.SubscribeToEvent(EventType.SCORE_UPDATED, OnShipScoreUpdate);
+
+        new SoundManager(GetComponent<AudioSource>());
+        Instantiate((GameObject)Resources.Load(ResourcesNames.SHIP, typeof(GameObject))).transform.position = Vector3.zero;
     }
 
-    void PrepareLevel()
+    void OnShipLifeChanged(object[] parameterContainer)
     {
-        ShipFactory().transform.position = Vector3.zero;
+        if ((int)parameterContainer[0] < 1) EventsManager.TriggerEvent(EventType.LOSE_CONDITION_ACHIEVED);
     }
 
-    GameObject ShipFactory()
+    void OnShipScoreUpdate(object[] parameterContainer)
     {
-        return Instantiate(_shipPrefab);
+        if ((int)parameterContainer[0] >= winScore) EventsManager.TriggerEvent(EventType.WIN_CONDITION_ACHIEVED);
     }
 
-	public void Restart()
+    public void Restart()
     {
-        EventsManager.Clear();
+        EventsManager.TriggerEvent(EventType.CLEAR_ALL);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

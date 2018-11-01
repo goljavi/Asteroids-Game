@@ -12,11 +12,20 @@ public class LazerBullet : IBulletBehaviour
     {
         _lifeSpan = lifeSpan;
         _reference = reference;
-        _reference.StartCoroutine(Stretch());
         EventsManager.TriggerEvent(EventType.LAZER_SHOOT);
     }
 
+    public void Init()
+    {
+        Stretch();
+    }
+
     public void OnTriggerEnter2D(Collider2D other){ }
+
+    public void Reset()
+    {
+        _tick = 0;
+    }
 
     public void Update()
     {
@@ -27,9 +36,8 @@ public class LazerBullet : IBulletBehaviour
         }
     }
 
-    IEnumerator Stretch()
+    void Stretch()
     {
-        yield return null;
         _reference.transform.Translate(new Vector3(0, 18, 0));
 
         var locSc = _reference.transform.localScale;

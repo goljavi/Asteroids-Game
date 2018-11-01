@@ -14,7 +14,6 @@ public class UIManager : MonoBehaviour {
     UIController _uic;
 
     void Start() {
-        _uic = new UIController(this);
         ToggleStartMenu();
         SetEvents(); 
     }
@@ -28,7 +27,7 @@ public class UIManager : MonoBehaviour {
     }
 
     void Update () {
-        _uic.Update();
+        if(_uic != null) _uic.Update();
 	}
 
     void OnLose(object[] parameterContainer)
@@ -77,11 +76,16 @@ public class UIManager : MonoBehaviour {
 
     public void TogglePauseMenu()
     {
-        if (_startMenu.activeSelf) return;
         var active = !_pauseMenu.activeSelf;
         _pauseMenu.SetActive(active);
         if (active) EventsManager.TriggerEvent(EventType.SHOWING_INTERACTIVE_CONTENT);
         else EventsManager.TriggerEvent(EventType.CLOSED_INTERACTIVE_CONTENT);
+    }
+
+    public void StartGame()
+    {
+        _uic = new UIController(this);
+        ToggleStartMenu();
     }
 
 }

@@ -99,6 +99,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e728a904b1ca328468bd8c67aefaf6ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  normalBulletSpeed: 10
+  normalBulletLifeSpan: 3
+  lazerBulletLifeSpan: 0.1
+  bombBulletLifeSpan: 1
+  bombLayerMask:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!212 &212578066809601238
 SpriteRenderer:
   m_ObjectHideFlags: 1
