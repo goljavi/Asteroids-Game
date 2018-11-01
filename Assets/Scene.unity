@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 94542332}
   - component: {fileID: 94542331}
   m_Layer: 5
-  m_Name: Text
+  m_Name: RESTART
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -396,7 +396,7 @@ GameObject:
   - component: {fileID: 394408829}
   - component: {fileID: 394408828}
   m_Layer: 5
-  m_Name: Text
+  m_Name: MAINMENU
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -605,7 +605,7 @@ GameObject:
   - component: {fileID: 534441360}
   - component: {fileID: 534441359}
   m_Layer: 5
-  m_Name: Text
+  m_Name: PLAY
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -714,7 +714,7 @@ GameObject:
   - component: {fileID: 621098061}
   - component: {fileID: 621098060}
   m_Layer: 5
-  m_Name: Title
+  m_Name: YOUWIN
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -788,7 +788,7 @@ GameObject:
   - component: {fileID: 631543341}
   - component: {fileID: 631543340}
   m_Layer: 5
-  m_Name: Text
+  m_Name: MAINMENU
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -862,7 +862,7 @@ GameObject:
   - component: {fileID: 813484848}
   - component: {fileID: 813484847}
   m_Layer: 5
-  m_Name: Title
+  m_Name: ASTEROIDS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -981,7 +981,7 @@ GameObject:
   - component: {fileID: 922685249}
   - component: {fileID: 922685248}
   m_Layer: 5
-  m_Name: Title
+  m_Name: YOULOST
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1206,6 +1206,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d536f5f49c98dc04c9cfb2ae5c52e9c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  localizableTexts:
+  - {fileID: 813484847}
+  - {fileID: 534441359}
+  - {fileID: 1374950417}
+  - {fileID: 1553255868}
+  - {fileID: 94542331}
+  - {fileID: 621098060}
+  - {fileID: 631543340}
+  - {fileID: 922685248}
+  - {fileID: 394408828}
+  language: 1
   _livesText: {fileID: 979140036}
   _scoreText: {fileID: 1031244682}
   _startMenu: {fileID: 1980068309}
@@ -1224,7 +1235,7 @@ GameObject:
   - component: {fileID: 979140035}
   - component: {fileID: 979140036}
   m_Layer: 5
-  m_Name: Lives
+  m_Name: LIVES
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1302,7 +1313,7 @@ GameObject:
   - component: {fileID: 1031244681}
   - component: {fileID: 1031244682}
   m_Layer: 5
-  m_Name: Score
+  m_Name: SCORE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1488,7 +1499,7 @@ GameObject:
   - component: {fileID: 1374950418}
   - component: {fileID: 1374950417}
   m_Layer: 5
-  m_Name: Title
+  m_Name: PAUSED
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1562,7 +1573,7 @@ GameObject:
   - component: {fileID: 1553255869}
   - component: {fileID: 1553255868}
   m_Layer: 5
-  m_Name: Text
+  m_Name: CONTINUE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

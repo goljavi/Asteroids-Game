@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour {
 
+    public Text[] localizableTexts;
+    public UserLanguage language;
     public Text _livesText;
     public Text _scoreText;
     public GameObject _startMenu;
@@ -12,10 +14,37 @@ public class UIManager : MonoBehaviour {
     public GameObject _winMenu;
     public GameObject _loseMenu;
     UIController _uic;
+    LocalizationManager _loc;
+    string _lang;
 
     void Start() {
+        SetEvents();
+        SetLocalization();
         ToggleStartMenu();
-        SetEvents(); 
+        ChangeLivesText(3);
+        ChangeScoreText(0);
+    }
+    void SetLocalization() {
+
+        _loc = new LocalizationManager();
+
+        switch (language)
+        {
+            case UserLanguage.Spanish:
+                _lang = LocalizationLanguages.SPANISH;
+                break;
+            case UserLanguage.Portuguese:
+                _lang = LocalizationLanguages.PORTUGESE;
+                break;
+            case UserLanguage.English: default:
+                _lang = LocalizationLanguages.ENGLISH;
+                break;
+        }
+
+        foreach (var item in localizableTexts)
+        {
+            item.text = _loc.GetText(_lang, item.gameObject.name);
+        }
     }
 
     void SetEvents()
@@ -42,12 +71,22 @@ public class UIManager : MonoBehaviour {
 
     void OnShipLifeChanged(object[] parameterContainer)
     {
-        _livesText.text = "Lives: " + (int)parameterContainer[0];
+        ChangeLivesText((int)parameterContainer[0]);
     }
 
     void OnScoreUpdate(object[] parameterContainer)
     {
-        _scoreText.text = "Score: " + (int)parameterContainer[0];
+        ChangeScoreText((int)parameterContainer[0]);
+    }
+
+    void ChangeLivesText(int lives)
+    {
+        _livesText.text = _loc.GetText(_lang, _livesText.gameObject.name) + ": " + lives;
+    }
+
+    void ChangeScoreText(int score)
+    {
+        _scoreText.text = _loc.GetText(_lang, _scoreText.gameObject.name) + ": " + score;
     }
 
     public void ToggleLoseMenu()
@@ -86,6 +125,13 @@ public class UIManager : MonoBehaviour {
     {
         _uic = new UIController(this);
         ToggleStartMenu();
+    }
+
+    public enum UserLanguage
+    {
+        English,
+        Spanish,
+        Portuguese
     }
 
 }
