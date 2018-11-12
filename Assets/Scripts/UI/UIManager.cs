@@ -6,37 +6,43 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour {
 
     public Text[] localizableTexts;
-    public UserLanguage language;
-    public Text _livesText;
-    public Text _scoreText;
-    public GameObject _startMenu;
-    public GameObject _pauseMenu;
-    public GameObject _winMenu;
-    public GameObject _loseMenu;
+    public Text livesText;
+    public Text scoreText;
+    public GameObject startMenu;
+    public GameObject pauseMenu;
+    public GameObject winMenu;
+    public GameObject loseMenu;
     UIController _uic;
     LocalizationManager _loc;
     string _lang;
+    int _actualLang;
+    int _lives;
+    int _score;
+    bool _showingInteractiveContent;
 
     void Start() {
-        SetEvents();
+        _loc = new LocalizationManager();
+        _uic = new UIController(this);
+        EventsManager.SubscribeToEvent(EventType.SHIP_LIFE_CHANGED, (p) => ChangeLivesText((int)p[0]));
+        EventsManager.SubscribeToEvent(EventType.SCORE_UPDATED, (p) => ChangeScoreText((int)p[0]));
+        EventsManager.SubscribeToEvent(EventType.LOSE_CONDITION_ACHIEVED, (p) => ToggleLoseMenu());
+        EventsManager.SubscribeToEvent(EventType.WIN_CONDITION_ACHIEVED, (p) => ToggleWinMenu());
+
         SetLocalization();
         ToggleStartMenu();
         ChangeLivesText(3);
         ChangeScoreText(0);
     }
     void SetLocalization() {
-
-        _loc = new LocalizationManager();
-
-        switch (language)
+        switch (_actualLang)
         {
-            case UserLanguage.Spanish:
+            case 0:
                 _lang = LocalizationLanguages.SPANISH;
                 break;
-            case UserLanguage.Portuguese:
+            case 1:
                 _lang = LocalizationLanguages.PORTUGESE;
                 break;
-            case UserLanguage.English: default:
+            case 2: default:
                 _lang = LocalizationLanguages.ENGLISH;
                 break;
         }
@@ -47,84 +53,73 @@ public class UIManager : MonoBehaviour {
         }
     }
 
-    void SetEvents()
+    public void ChangeLocalization()
     {
-        EventsManager.SubscribeToEvent(EventType.SHIP_LIFE_CHANGED, OnShipLifeChanged);
-        EventsManager.SubscribeToEvent(EventType.SCORE_UPDATED, OnScoreUpdate);
-        EventsManager.SubscribeToEvent(EventType.LOSE_CONDITION_ACHIEVED, OnLose);
-        EventsManager.SubscribeToEvent(EventType.WIN_CONDITION_ACHIEVED, OnWin);
+        _actualLang++;
+        if (_actualLang >= System.Enum.GetNames(typeof(UserLanguage)).Length) _actualLang = 0;
+        SetLocalization();
+        ChangeLivesText(_lives);
+        ChangeScoreText(_score);
     }
 
     void Update () {
         if(_uic != null) _uic.Update();
 	}
 
-    void OnLose(object[] parameterContainer)
-    {
-        ToggleLoseMenu();
-    }
-
-    void OnWin(object[] parameterContainer)
-    {
-        ToggleWinMenu();
-    }
-
-    void OnShipLifeChanged(object[] parameterContainer)
-    {
-        ChangeLivesText((int)parameterContainer[0]);
-    }
-
-    void OnScoreUpdate(object[] parameterContainer)
-    {
-        ChangeScoreText((int)parameterContainer[0]);
-    }
-
     void ChangeLivesText(int lives)
     {
-        _livesText.text = _loc.GetText(_lang, _livesText.gameObject.name) + ": " + lives;
+        _lives = lives;
+        livesText.text = _loc.GetText(_lang, livesText.gameObject.name) + ": " + _lives;
     }
 
     void ChangeScoreText(int score)
     {
-        _scoreText.text = _loc.GetText(_lang, _scoreText.gameObject.name) + ": " + score;
+        _score = score;
+        scoreText.text = _loc.GetText(_lang, scoreText.gameObject.name) + ": " + _score;
     }
 
     public void ToggleLoseMenu()
     {
-        var active = !_loseMenu.activeSelf;
-        _loseMenu.SetActive(active);
-        if (active) EventsManager.TriggerEvent(EventType.SHOWING_INTERACTIVE_CONTENT);
-        else EventsManager.TriggerEvent(EventType.CLOSED_INTERACTIVE_CONTENT);
+        loseMenu.SetActive(true);
+        pauseMenu.SetActive(false);
+        TriggerInteractiveContentEvents(true);
     }
 
     public void ToggleWinMenu()
     {
-        var active = !_winMenu.activeSelf;
-        _winMenu.SetActive(active);
-        if (active) EventsManager.TriggerEvent(EventType.SHOWING_INTERACTIVE_CONTENT);
-        else EventsManager.TriggerEvent(EventType.CLOSED_INTERACTIVE_CONTENT);
+        winMenu.SetActive(true);
+        pauseMenu.SetActive(false);
+        TriggerInteractiveContentEvents(true);
     }
 
     public void ToggleStartMenu()
     {
-        var active = !_startMenu.activeSelf;
-        _startMenu.SetActive(active);
-        if (active) EventsManager.TriggerEvent(EventType.SHOWING_INTERACTIVE_CONTENT);
-        else EventsManager.TriggerEvent(EventType.CLOSED_INTERACTIVE_CONTENT);
+        var active = !startMenu.activeSelf;
+        startMenu.SetActive(active);
+        TriggerInteractiveContentEvents(active);
+
+        if (!active)
+        {
+            EventsManager.TriggerEvent(EventType.GAME_STARTED);
+            scoreText.gameObject.SetActive(true);
+            livesText.gameObject.SetActive(true);
+        }
     }
 
     public void TogglePauseMenu()
     {
-        var active = !_pauseMenu.activeSelf;
-        _pauseMenu.SetActive(active);
-        if (active) EventsManager.TriggerEvent(EventType.SHOWING_INTERACTIVE_CONTENT);
-        else EventsManager.TriggerEvent(EventType.CLOSED_INTERACTIVE_CONTENT);
+        var active = !pauseMenu.activeSelf;
+        if (active && _showingInteractiveContent) return;
+
+        pauseMenu.SetActive(active);
+        TriggerInteractiveContentEvents(active);
     }
 
-    public void StartGame()
+    void TriggerInteractiveContentEvents(bool active)
     {
-        _uic = new UIController(this);
-        ToggleStartMenu();
+        _showingInteractiveContent = active;
+        if (active) EventsManager.TriggerEvent(EventType.SHOWING_INTERACTIVE_CONTENT);
+        else EventsManager.TriggerEvent(EventType.CLOSED_INTERACTIVE_CONTENT);
     }
 
     public enum UserLanguage

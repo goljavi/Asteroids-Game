@@ -17,14 +17,21 @@ public class AsteroidSpawner : MonoBehaviour {
         _asteroidStageDataDictionary = new Dictionary<int, AsteroidStageData>();
 
         EventsManager.SubscribeToEvent(EventType.ASTEROID_HIT, OnAsteroidHit);
+        EventsManager.SubscribeToEvent(EventType.GAME_STARTED, OnGameStarted);
+    }
 
-        PrepareAsteroidDataDictionary();
+    void OnGameStarted(object[] parametersContainer)
+    {
+        foreach (var item in asteroidStageDataList)
+        {
+            _asteroidStageDataDictionary[item.stage] = item;
+        }
 
         for (int i = 0; i < 8; i++)
         {
-            Spawn(initialAsteroidStage, new Vector3(Random.Range(18, -18), Random.Range(10, -10), 0));
+            if (Random.value > 0.5f) Spawn(initialAsteroidStage, new Vector3(Random.Range(18, -18), Random.Range(10, 2), 0));
+            else Spawn(initialAsteroidStage, new Vector3(Random.Range(18, -18), Random.Range(-2, -10), 0));
         }
-        
     }
 
     void OnAsteroidHit(object[] parametersContainer)
@@ -55,14 +62,6 @@ public class AsteroidSpawner : MonoBehaviour {
     Asteroid AsteroidFactory()
     {
         return Instantiate(_asteroidPrefab);
-    }
-
-    void PrepareAsteroidDataDictionary()
-    {
-        foreach (var item in asteroidStageDataList)
-        {
-            _asteroidStageDataDictionary[item.stage] = item;
-        }
     }
 
     public void ReturnAsteroidToPool(Asteroid asteroid)

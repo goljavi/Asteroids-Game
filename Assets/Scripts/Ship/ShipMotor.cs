@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ShipMotor : MonoBehaviour {
-    Rigidbody2D _rb;
-    float cooldownTimer;
     public float weaponCooldown;
     public float thrust;
     public float rotationThrust;
@@ -13,6 +11,8 @@ public class ShipMotor : MonoBehaviour {
     public float thresholdForce;
     public int totalLife;
     public int asteroidHitScore;
+    Rigidbody2D _rb;
+    float _cooldownTimer;
     int _actualLife;
     int _score;
     bool _ableToMove = true;
@@ -45,8 +45,8 @@ public class ShipMotor : MonoBehaviour {
 
     public void Shoot()
     {
-        if (cooldownTimer >= Time.time || !_ableToMove) return;
-        cooldownTimer = Time.time + weaponCooldown;
+        if (_cooldownTimer >= Time.time || !_ableToMove) return;
+        _cooldownTimer = Time.time + weaponCooldown;
         EventsManager.TriggerEvent(EventType.SHIP_SHOOT, transform);
     }
 

@@ -12,5 +12,6 @@ public class UIController {
 
 	public void Update () {
         if (Input.GetKeyDown(KeyCode.Escape)) _reference.TogglePauseMenu();
+        else if(Input.GetKeyDown(KeyCode.L)) _reference.ChangeLocalization();
     }
 }

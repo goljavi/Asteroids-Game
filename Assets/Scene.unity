@@ -736,7 +736,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 142.99994}
-  m_SizeDelta: {x: 354.58, y: 109.4}
+  m_SizeDelta: {x: 884.6, y: 109.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &621098060
 MonoBehaviour:
@@ -1003,7 +1003,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 142.99994}
-  m_SizeDelta: {x: 354.58, y: 109.4}
+  m_SizeDelta: {x: 800.91, y: 109.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &922685248
 MonoBehaviour:
@@ -1216,13 +1216,12 @@ MonoBehaviour:
   - {fileID: 631543340}
   - {fileID: 922685248}
   - {fileID: 394408828}
-  language: 1
-  _livesText: {fileID: 979140036}
-  _scoreText: {fileID: 1031244682}
-  _startMenu: {fileID: 1980068309}
-  _pauseMenu: {fileID: 210142434}
-  _winMenu: {fileID: 1568671206}
-  _loseMenu: {fileID: 591100116}
+  livesText: {fileID: 979140036}
+  scoreText: {fileID: 1031244682}
+  startMenu: {fileID: 1980068309}
+  pauseMenu: {fileID: 210142434}
+  winMenu: {fileID: 1568671206}
+  loseMenu: {fileID: 591100116}
 --- !u!1 &979140033
 GameObject:
   m_ObjectHideFlags: 0
@@ -1240,7 +1239,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &979140034
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1318,7 +1317,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1031244680
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2207,7 +2206,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!224 &2011435188
 RectTransform:
@@ -2310,7 +2309,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 929227252}
-        m_MethodName: StartGame
+        m_MethodName: ToggleStartMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

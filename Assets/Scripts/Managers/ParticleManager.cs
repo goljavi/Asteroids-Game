@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ParticleManager : MonoBehaviour {
-
     GameObject _shipHitParticle;
     GameObject _loseParticle;
     Pool<GameObject> _asteroidHitParticlePool;

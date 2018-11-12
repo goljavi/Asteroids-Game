@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SoundManager {
-
     Dictionary<string, AudioClip> _audioList;
     AudioSource _as;
 

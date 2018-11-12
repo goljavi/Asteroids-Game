@@ -8,24 +8,24 @@ public class Bullet : MonoBehaviour {
     public float lazerBulletLifeSpan;
     public float bombBulletLifeSpan;
     public LayerMask bombLayerMask;
-    IBulletBehaviour bullet;
+    IBulletBehaviour _bullet;
     Dictionary<string, IBulletBehaviour> _behaviors;
 
     public void Update()
     {
-        bullet.Update();
+        _bullet.Update();
     }
 
     public void SetBehavior(string behavior)
     {
         if (!_behaviors.ContainsKey(behavior)) return;
-        bullet = _behaviors[behavior];
-        bullet.Reset();
+        _bullet = _behaviors[behavior];
+        _bullet.Reset();
     }
 
     public void Init()
     {
-        bullet.Init();
+        _bullet.Init();
     }
 
     public void Activate()
@@ -37,7 +37,7 @@ public class Bullet : MonoBehaviour {
             { BulletBehavior.Bomb, new BombBullet(bombBulletLifeSpan, this, bombLayerMask) }
         };
 
-        bullet = _behaviors[BulletBehavior.Normal];
+        _bullet = _behaviors[BulletBehavior.Normal];
         transform.position = Vector3.zero;
     }
 
@@ -65,6 +65,6 @@ public class Bullet : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        bullet.OnTriggerEnter2D(other);
+        _bullet.OnTriggerEnter2D(other);
     }
 }

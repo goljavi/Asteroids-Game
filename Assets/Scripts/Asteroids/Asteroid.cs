@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Asteroid : MonoBehaviour
 {
-    
     public float yBoundary;
     public float xBoundary;
 
@@ -25,7 +24,7 @@ public class Asteroid : MonoBehaviour
 
     void Move()
     {
-        _rb.AddForce(new Vector3(Random.Range(-_thrust, _thrust), Random.Range(-_thrust, _thrust), 0));
+        _rb.AddForce(-(Vector3.zero - transform.position).normalized * Random.Range(0.5f, _thrust));
         _rb.AddTorque(Random.Range(-_torque, _torque));
     }
 
