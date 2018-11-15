@@ -29,6 +29,8 @@ public class ShipMotor : MonoBehaviour {
         EventsManager.SubscribeToEvent(EventType.SHOWING_INTERACTIVE_CONTENT, OnInteractiveContentShown);
         EventsManager.SubscribeToEvent(EventType.CLOSED_INTERACTIVE_CONTENT, OnInteractiveContentClosed);
         EventsManager.SubscribeToEvent(EventType.ASTEROID_HIT, OnAsteroidHit);
+
+        EventsManager.TriggerEvent(EventType.SHIP_SPAWNED, this);
     }
 	
 	void Update () {

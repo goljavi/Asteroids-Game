@@ -17,4 +17,5 @@ public static class EventType {
     public const string RETURN_BULLET = "returnBullet";
     public const string CLEAR_ALL = "clearAll";
     public const string GAME_STARTED = "gameStarted";
+    public const string SHIP_SPAWNED = "shipSpawned";
 }
