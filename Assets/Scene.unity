@@ -1410,10 +1410,10 @@ MonoBehaviour:
   speed: 8.14332
   radius: 4.060339
   nodes:
-  - {x: 7.865716, y: 3.224301}
+  - {x: 7.865716, y: 2.8035572}
   - {x: 14.330833, y: 2.2930517}
   - {x: 13.394168, y: 7.707369}
-  - {x: 7.7972255, y: 8.110503}
+  - {x: 8.768898, y: 7.039132}
 --- !u!58 &1129788297
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1480,7 +1480,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1129788295}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.26, y: 5.55, z: 0}
+  m_LocalPosition: {x: 11, y: 6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

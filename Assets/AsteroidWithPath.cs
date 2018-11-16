@@ -25,7 +25,7 @@ public class AsteroidWithPath : MonoBehaviour {
 
     void Update () {
         if (nodes.Count == 0 || _player == null) return;
-
+        
         if(Vector3.Distance(transform.position, _player.transform.position) < radius)
         {
             transform.position = Vector3.Lerp(transform.position, _player.transform.position, Time.deltaTime * (speed / 4));
