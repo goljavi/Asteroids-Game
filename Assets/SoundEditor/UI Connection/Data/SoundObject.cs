@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class SoundObject {
     public int id;
-    public int delay;
-    public int stop;
+    public float delay;
+    public float stop;
 }

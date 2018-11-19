@@ -54,7 +54,7 @@ MonoBehaviour:
       width: 100
       height: 100
     windowTitle: Delay
-    data: 3
+    data: 0.5
     nodeType: Delay
   - id: 6101
     parentIds: 7e170000
@@ -65,5 +65,5 @@ MonoBehaviour:
       width: 200
       height: 130
     windowTitle: Sound
-    data: 1|3
+    data: 1|3.2
     nodeType: Sound

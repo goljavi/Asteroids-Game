@@ -46,8 +46,9 @@ public class SoundBehavior : MonoBehaviour
 
     public void StartPlaying()
     {
+        if (IsPlaying) return;
         canPlayLoop = true;
-        if (!IsPlaying) StartCoroutine(Play());
+        StartCoroutine(Play());
     }
 
     IEnumerator Play()
@@ -74,6 +75,7 @@ public class SoundBehavior : MonoBehaviour
             current++;
             soundObject = GetSoundObject(current);
         }
+        if (loop) current = 0;
         IsPlaying = false;
     }
 
@@ -97,16 +99,16 @@ public class SoundBehavior : MonoBehaviour
         return new SoundObject()
         {
             id = int.Parse(data[0]),
-            stop = int.Parse(data[1]),
+            stop = float.Parse(data[1]),
             delay = GetDelay(obj)
         };
     }
 
-    int GetDelay(SoundMapSerializedObject obj)
+    float GetDelay(SoundMapSerializedObject obj)
     {
         var parent = GetParent(obj);
         if (parent == null || parent.nodeType != "Delay") return 0;
-        return int.Parse(parent.data);
+        return float.Parse(parent.data);
     }
 
     SoundMapSerializedObject GetParent(SoundMapSerializedObject obj)

@@ -5,7 +5,7 @@ using UnityEditor;
 
 public class SoundNode : BaseNode {
     public int idValue;
-    public int stopValue;
+    public float stopValue;
 
     public override string GetNodeType { get { return "Sound"; } }
 
@@ -15,7 +15,7 @@ public class SoundNode : BaseNode {
         var iValue = EditorGUILayout.IntField(idValue);
 
         EditorGUILayout.LabelField("Stop At (seconds):");
-        var sValue = EditorGUILayout.IntField(stopValue);
+        var sValue = EditorGUILayout.FloatField(stopValue);
         EditorGUILayout.LabelField("(0 = AUTO)");
 
         if (iValue != idValue || sValue != stopValue)
@@ -40,7 +40,7 @@ public class SoundNode : BaseNode {
 	public override BaseNode SetNodeData(string data) {
         var dataArr = data.Split('|');
         idValue = int.Parse(dataArr[0]);
-        stopValue = int.Parse(dataArr[1]);
+        stopValue = float.Parse(dataArr[1]);
         return this;
 	}
 
