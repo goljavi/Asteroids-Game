@@ -68,7 +68,7 @@ public class AsteroidWithPathEditor : Editor {
             {
                 _target.nodes[i] = Handles.PositionHandle(_target.nodes[i], Quaternion.identity);
                 if (_snap) _target.nodes[i] = new Vector3(_snapValue * Mathf.Round(_target.nodes[i].x / _snapValue), _snapValue * Mathf.Round(_target.nodes[i].y / _snapValue), 0);
-                Handles.DrawSphere(i, _target.nodes[i], Quaternion.identity, 0.3f);
+                Handles.SphereHandleCap(i, _target.nodes[i], Quaternion.identity, 0.3f, UnityEngine.EventType.Repaint);
                 if (!_hideNames) Handles.Label(_target.nodes[i], i.ToString());
             }
 
